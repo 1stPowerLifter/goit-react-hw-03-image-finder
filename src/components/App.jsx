@@ -5,17 +5,14 @@ import { AppStyled } from "./App.styled"
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
-import { Modal } from './Modal/Modal';
 import { ApiRequest } from 'API/API';
-import { shadow } from 'styled-system';
 
 const InitsialState = {
   query: "",
   page: 1,
   totalHits: 0,
   hits: [],
-  loading: false,
-  showModal: false
+  loading: false
 }
 
 export class App extends Component {
@@ -28,14 +25,14 @@ export class App extends Component {
       this.formFetch(query)
     }
      
-     if (prevState.page !== page) {
+     if (prevState.page !== page && page !== 1) {
        this.loadMore(prevState ,page)
     }
   }
 
 
   render() {
-    const { hits, page, totalHits, loading, showModal} = this.state
+    const { hits, page, totalHits, loading} = this.state
     const maxPage = Math.ceil( +totalHits / 12 )
     return (
       <AppStyled>
@@ -43,7 +40,6 @@ export class App extends Component {
         <ImageGallery imgs={hits} imageClick={this.showBigImage} />
         {page < maxPage && <Button title="Load more" onClick={this.updatePage} />}
         {loading && <Loader />}
-        {showModal && <Modal />}
       
         <GlobalStyle />
       </AppStyled>
@@ -77,6 +73,4 @@ export class App extends Component {
     this.setState({ hits:[ ...prevState.hits, ...hits], page})
     this.setState({ loading: false })
   }
-
-  showBigImage = () => this.setState(({showModal}) =>({showModal: !showModal}))
 }

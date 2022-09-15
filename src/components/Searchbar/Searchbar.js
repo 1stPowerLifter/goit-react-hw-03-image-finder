@@ -1,5 +1,6 @@
 import * as SC from "./Searchbar.styled"
 import PropTypes from 'prop-types';
+import { FcSearch } from 'react-icons/fc';
 
 export const Searchbar = ({updateQuery}) => {
 
@@ -14,7 +15,7 @@ export const Searchbar = ({updateQuery}) => {
             <SC.Searchbar>
                 <SC.SearchForm onSubmit={e => hendleSubmit(e) }>
                     <button type="submit" className="button">
-                        <span className="button-label">Search</span>
+                        <FcSearch fontSize="30px"/>
                     </button>
 
                     <input
