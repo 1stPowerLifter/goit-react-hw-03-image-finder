@@ -1,6 +1,7 @@
 import * as SC from './Modal.styled'
 import { createPortal } from 'react-dom'
 import { Component } from 'react'
+import PropTypes from 'prop-types'
 
 const modalRoot = document.querySelector('#modal-root')
 console.log(modalRoot)
@@ -37,4 +38,10 @@ export class Modal extends Component {
         if (e.target === e.currentTarget) this.props.modalChanger()
     }
 
+}
+
+Modal.propTypes = {
+    modalChanger: PropTypes.func.isRequired,
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired
 }
